@@ -1,0 +1,42 @@
+stateDiagram-v2
+off : OFF
+on : ON
+ready : READY
+active : ACTIVE
+
+warning : WARNING
+warning_level_1 : LEVEL 1
+warning_level_2 : LEVEL 2
+warning_level_3 : LEVEL 3
+
+control : CONTROL
+control_level_1 : LEVEL 1
+control_level_2 : LEVEL 2
+control_level_3 : LEVEL 3
+
+direction TB
+[*] --> off
+off --> on
+state on {
+    direction LR
+    [*] --> ready
+    ready --> active
+}
+state active {
+    direction TB
+    [*] --> warning
+    warning --> control
+}
+state warning {
+    direction LR
+    [*] --> warning_level_1
+    warning_level_1 --> warning_level_2
+    warning_level_2 --> warning_level_3
+}
+
+state control {
+    direction LR
+    [*] --> control_level_1
+    control_level_1 --> control_level_2
+    control_level_2 --> control_level_3
+}
